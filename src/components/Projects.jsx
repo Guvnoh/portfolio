@@ -1,37 +1,8 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import { FiExternalLink } from "react-icons/fi";
-import { image } from "framer-motion/client";
-
-const projects = [
-  {
-    title: `Nori's Stitches`,
-    image: "/images/noris_stitches.png",
-    description: `Responsive fashion catalogue website designed 
-    to help customers browse collections easily across mobile and desktop devices`,
-    tags: ["React", "Typescript", "Node.js", "Tailwind css", "Mongo DB"],
-    link: "https://noris-stitches.vercel.app/",
-  },
-  {
-    title: "oakwood",
-    image: "/images/oakwood.png",
-    description: `A React + TypeScript care home management platform 
-    with a public-facing website (Home, Services, Gallery, Contact, Careers) 
-    and a protected admin dashboard for managing residents, staff, rooms, medication,
-     incidents, CQC reports, and billing.`,
-    tags: ["Next.js", "TypeScript", "GraphQL", "AWS Lambda"],
-    link: "https://oakwood-zeta.vercel.app/",
-  },
-  {
-    // TODO: Replace with your real project
-    title: "Small chops",
-    image: "/images/small_chops.png",
-    description: `A React + TypeScript, front end only restaurant website built with Vite, 
-    featuring pages for Home, Menu, About, and Contact`,
-    tags: ["React", "Node.js", "Stripe", "Tailwind CSS"],
-    link: "https://small-chops.vercel.app/",
-  },
-];
+import projects from "../data/projects";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -79,30 +50,31 @@ export default function Projects() {
               className="project-card"
               variants={cardVariants}
             >
-              {/* TODO: Replace placeholder gradient with real project image/screenshot */}
-              <div className="project-card__image">
-                <img src={project.image} alt={project.title} />
-                <div className="project-card__overlay">
-                  <a href={project.link} className="project-card__view-btn">
-                    View Project
-                    <FiExternalLink />
-                  </a>
-                </div>
-              </div>
-
-              <div className="project-card__body">
-                <h3 className="project-card__title">{project.title}</h3>
-                <p className="project-card__description">
-                  {project.description}
-                </p>
-                <div className="project-card__tags">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="project-card__tag">
-                      {tag}
+              <Link to={`/projects/${project.slug}`} className="project-card__link">
+                <div className="project-card__image">
+                  <img src={project.images[0]} alt={project.title} />
+                  <div className="project-card__overlay">
+                    <span className="project-card__view-btn">
+                      View Details
+                      <FiExternalLink />
                     </span>
-                  ))}
+                  </div>
                 </div>
-              </div>
+
+                <div className="project-card__body">
+                  <h3 className="project-card__title">{project.title}</h3>
+                  <p className="project-card__description">
+                    {project.description}
+                  </p>
+                  <div className="project-card__tags">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="project-card__tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Link>
             </motion.article>
           ))}
         </motion.div>

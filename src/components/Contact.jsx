@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   FiGithub,
   FiLinkedin,
@@ -9,18 +10,34 @@ import {
   FiMapPin,
   FiPhoneCall,
   FiMessageCircle,
+  FiCheck,
+  FiAlertCircle,
 } from "react-icons/fi";
 
 export default function Contact() {
   const ref = useRef(null);
+  const formRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState("idle");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Replace with actual form submission (e.g. EmailJS, Formspree, etc.)
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setStatus("sending");
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      setStatus("sent");
+      formRef.current.reset();
+    } catch {
+      setStatus("error");
+    }
+
+    setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
@@ -43,6 +60,7 @@ export default function Contact() {
 
         <div className="contact__grid">
           <motion.form
+            ref={formRef}
             className="contact__form"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: -30 }}
@@ -57,6 +75,7 @@ export default function Contact() {
                 <input
                   id="name"
                   type="text"
+                  name="name"
                   className="contact__input"
                   placeholder="Your name"
                   required
@@ -69,6 +88,7 @@ export default function Contact() {
                 <input
                   id="email"
                   type="email"
+                  name="email"
                   className="contact__input"
                   placeholder="you@example.com"
                   required
@@ -81,15 +101,29 @@ export default function Contact() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 className="contact__textarea"
                 placeholder="Tell me about your project..."
                 rows={5}
                 required
               />
             </div>
-            <button type="submit" className="btn btn--primary contact__submit">
-              {submitted ? "Message Sent!" : "Send Message"}
-              <FiSend className="btn__icon" />
+            <button
+              type="submit"
+              className="btn btn--primary contact__submit"
+              disabled={status === "sending"}
+            >
+              {status === "sending" && "Sending..."}
+              {status === "sent" && "Message Sent!"}
+              {status === "error" && "Failed — Try Again"}
+              {status === "idle" && "Send Message"}
+              {status === "sent" ? (
+                <FiCheck className="btn__icon" />
+              ) : status === "error" ? (
+                <FiAlertCircle className="btn__icon" />
+              ) : (
+                <FiSend className="btn__icon" />
+              )}
             </button>
           </motion.form>
 

@@ -35,50 +35,112 @@ The content is organized as follows:
 # Directory Structure
 ```
 .gitignore
+index.html
 package.json
 public/images/noris_stitches.png
 public/images/oakwood.png
 public/images/small_chops.png
-public/index.html
 README.md
 src/App.css
-src/App.js
+src/App.jsx
 src/components/About.jsx
 src/components/Contact.jsx
 src/components/Hero.jsx
 src/components/Navbar.jsx
 src/components/Projects.jsx
+src/components/Services.jsx
 src/index.css
-src/index.js
+src/main.jsx
+vite.config.js
 ```
 
 # Files
 
+## File: index.html
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <meta
+      name="description"
+      content="Freelance full-stack web developer — React, Node.js, TypeScript. I build beautiful websites."
+    />
+    <title>Chukwuka Asogwa | React Developer</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+```
+
+## File: src/App.jsx
+```javascript
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Services from "./components/Services";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import "./App.css";
+
+function App() {
+  return (
+    <div className="app">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Projects />
+        <Contact />
+      </main>
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} Guvnoh. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
+```
+
+## File: src/main.jsx
+```javascript
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+## File: vite.config.js
+```javascript
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+});
+```
+
 ## File: .gitignore
 ```
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
+node_modules
+dist
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+.env
+*.local
 ```
 
 ## File: package.json
@@ -87,65 +149,24 @@ yarn-error.log*
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^13.5.0",
+    "@emailjs/browser": "^4.4.1",
     "framer-motion": "^12.40.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-icons": "^5.6.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-icons": "^5.6.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.3.2"
   }
 }
-```
-
-## File: public/index.html
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0a0f" />
-    <meta
-      name="description"
-      content="Freelance full-stack web developer — React, Node.js, TypeScript. I build digital products that perform."
-    />
-    <title>CodeCraft — Freelance Full-Stack Developer</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
-</html>
 ```
 
 ## File: README.md
@@ -298,7 +319,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   right: 0;
   z-index: 1000;
   height: var(--nav-height);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .navbar--scrolled {
@@ -350,7 +373,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 }
 
 .navbar__link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -430,8 +453,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0, 212, 255, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 30%, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+    radial-gradient(
+      ellipse 60% 50% at 20% 50%,
+      rgba(0, 212, 255, 0.06) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40% 40% at 80% 30%,
+      rgba(0, 212, 255, 0.04) 0%,
+      transparent 70%
+    );
   pointer-events: none;
 }
 
@@ -522,8 +553,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 }
 
 @keyframes scrollDot {
-  0%, 100% { opacity: 1; transform: translateY(0); }
-  50% { opacity: 0.3; transform: translateY(8px); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(8px);
+  }
 }
 
 /* ---------- About ---------- */
@@ -630,7 +668,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 .project-card:hover {
   transform: translateY(-6px);
   border-color: var(--accent-dim);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 212, 255, 0.05);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(0, 212, 255, 0.05);
 }
 
 .project-card__image {
@@ -639,11 +679,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
   overflow: hidden;
 }
 
+.project-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .project-card__placeholder {
   width: 100%;
   height: 100%;
   /* TODO: Replace with real project screenshot */
-  background: linear-gradient(135deg, var(--bg-card-hover) 0%, var(--bg-secondary) 50%, var(--bg-card-hover) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bg-card-hover) 0%,
+    var(--bg-secondary) 50%,
+    var(--bg-card-hover) 100%
+  );
 }
 
 .project-card__overlay {
@@ -718,6 +769,94 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 @media (max-width: 768px) {
   .projects__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Services ---------- */
+
+.services {
+  padding: 6rem 1.5rem;
+}
+
+.services__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-dim);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(0, 212, 255, 0.05);
+}
+
+.service-card__icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius);
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  transition: all 0.35s ease;
+}
+
+.service-card:hover .service-card__icon-wrap {
+  background: var(--accent);
+}
+
+.service-card__icon {
+  font-size: 1.4rem;
+  color: var(--accent);
+  transition: color 0.35s ease;
+}
+
+.service-card:hover .service-card__icon {
+  color: var(--bg-primary);
+}
+
+.service-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.service-card__description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+@media (max-width: 1024px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .services__grid {
     grid-template-columns: 1fr;
   }
 }
@@ -908,35 +1047,6 @@ a.contact__info-value:hover {
 }
 ```
 
-## File: src/App.js
-```javascript
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import "./App.css";
-
-function App() {
-  return (
-    <div className="app">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-      </main>
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Guvnoh. All rights reserved.</p>
-      </footer>
-    </div>
-  );
-}
-
-export default App;
-```
-
 ## File: src/components/About.jsx
 ```javascript
 import { useRef } from "react";
@@ -998,16 +1108,10 @@ export default function About() {
           <div className="about__bio">
             <p>
               {/* TODO: Replace with your real bio */}
-              I'm a freelance full-stack developer with over six years of
-              experience helping startups, agencies, and established businesses
-              ship products that users love. I don't just write code — I solve
-              problems, reduce complexity, and deliver results on time.
-            </p>
-            <p>
-              Whether you need a polished frontend, a battle-tested API, or an
-              entire platform from scratch, I work directly with you to turn
-              your vision into a reliable, performant product. No bureaucracy,
-              just craft and accountability.
+              I’m a frontend-focused web developer building modern websites and
+              web apps with React, TypeScript, and Node.js. I enjoy turning
+              ideas into clean, responsive products that are fast, functional
+              and intuitive.
             </p>
           </div>
         </motion.div>
@@ -1042,6 +1146,7 @@ export default function About() {
 ```javascript
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   FiGithub,
   FiLinkedin,
@@ -1051,18 +1156,34 @@ import {
   FiMapPin,
   FiPhoneCall,
   FiMessageCircle,
+  FiCheck,
+  FiAlertCircle,
 } from "react-icons/fi";
 
 export default function Contact() {
   const ref = useRef(null);
+  const formRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState("idle");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Replace with actual form submission (e.g. EmailJS, Formspree, etc.)
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setStatus("sending");
+
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      setStatus("sent");
+      formRef.current.reset();
+    } catch {
+      setStatus("error");
+    }
+
+    setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
@@ -1085,6 +1206,7 @@ export default function Contact() {
 
         <div className="contact__grid">
           <motion.form
+            ref={formRef}
             className="contact__form"
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: -30 }}
@@ -1099,6 +1221,7 @@ export default function Contact() {
                 <input
                   id="name"
                   type="text"
+                  name="name"
                   className="contact__input"
                   placeholder="Your name"
                   required
@@ -1111,6 +1234,7 @@ export default function Contact() {
                 <input
                   id="email"
                   type="email"
+                  name="email"
                   className="contact__input"
                   placeholder="you@example.com"
                   required
@@ -1123,15 +1247,29 @@ export default function Contact() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 className="contact__textarea"
                 placeholder="Tell me about your project..."
                 rows={5}
                 required
               />
             </div>
-            <button type="submit" className="btn btn--primary contact__submit">
-              {submitted ? "Message Sent!" : "Send Message"}
-              <FiSend className="btn__icon" />
+            <button
+              type="submit"
+              className="btn btn--primary contact__submit"
+              disabled={status === "sending"}
+            >
+              {status === "sending" && "Sending..."}
+              {status === "sent" && "Message Sent!"}
+              {status === "error" && "Failed — Try Again"}
+              {status === "idle" && "Send Message"}
+              {status === "sent" ? (
+                <FiCheck className="btn__icon" />
+              ) : status === "error" ? (
+                <FiAlertCircle className="btn__icon" />
+              ) : (
+                <FiSend className="btn__icon" />
+              )}
             </button>
           </motion.form>
 
@@ -1260,7 +1398,7 @@ export default function Hero() {
 
         <motion.p className="hero__subtitle" variants={itemVariants}>
           {/* TODO: Replace with your own tagline */}
-          Frontend · Backend · Full-Stack etc.
+          Frontend · Backend · Full-Stack
         </motion.p>
 
         <motion.div className="hero__ctas" variants={itemVariants}>
@@ -1299,6 +1437,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 
 const navLinks = [
   { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
@@ -1389,14 +1528,15 @@ export default function Navbar() {
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { FiExternalLink } from "react-icons/fi";
-import { image } from "framer-motion/client";
 
 const projects = [
   {
     title: `Nori's Stitches`,
     image: "/images/noris_stitches.png",
-    description: "A catalogue website for a Nigerian Women fashion brand ",
+    description: `Responsive fashion catalogue website designed 
+    to help customers browse collections easily across mobile and desktop devices`,
     tags: ["React", "Typescript", "Node.js", "Tailwind css", "Mongo DB"],
+    link: "https://noris-stitches.vercel.app/",
   },
   {
     title: "oakwood",
@@ -1405,7 +1545,8 @@ const projects = [
     with a public-facing website (Home, Services, Gallery, Contact, Careers) 
     and a protected admin dashboard for managing residents, staff, rooms, medication,
      incidents, CQC reports, and billing.`,
-    tags: ["Next.js", "TypeScript", "GraphQL", "AWS Lambda"],
+    tags: ["React", "Typescript", "Node.js", "Tailwind css", "Mongo DB"],
+    link: "https://oakwood-zeta.vercel.app/",
   },
   {
     // TODO: Replace with your real project
@@ -1413,7 +1554,8 @@ const projects = [
     image: "/images/small_chops.png",
     description: `A React + TypeScript, front end only restaurant website built with Vite, 
     featuring pages for Home, Menu, About, and Contact`,
-    tags: ["React", "Node.js", "Stripe", "Tailwind CSS"],
+    tags: ["React", "Typescript", "Node.js", "Tailwind CSS"],
+    link: "https://small-chops.vercel.app/",
   },
 ];
 
@@ -1467,11 +1609,7 @@ export default function Projects() {
               <div className="project-card__image">
                 <img src={project.image} alt={project.title} />
                 <div className="project-card__overlay">
-                  <a
-                    href="/"
-                    className="project-card__view-btn"
-                    onClick={(e) => e.preventDefault()}
-                  >
+                  <a href={project.link} className="project-card__view-btn">
                     View Project
                     <FiExternalLink />
                   </a>
@@ -1491,6 +1629,118 @@ export default function Projects() {
                   ))}
                 </div>
               </div>
+            </motion.article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+```
+
+## File: src/components/Services.jsx
+```javascript
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  FiMonitor,
+  FiShoppingCart,
+  FiGrid,
+  FiSmartphone,
+  FiLink,
+  FiCloud,
+} from "react-icons/fi";
+
+const services = [
+  {
+    title: "Business Websites",
+    description:
+      "Clean, professional sites that communicate your brand, capture leads, and convert visitors into customers.",
+    Icon: FiMonitor,
+  },
+  {
+    title: "Ecommerce Frontends",
+    description:
+      "Modern storefronts with smooth checkout flows, product filtering, and mobile-first shopping experiences.",
+    Icon: FiShoppingCart,
+  },
+  {
+    title: "Admin Dashboards",
+    description:
+      "Data-rich interfaces with charts, tables, and controls that make managing your business a breeze.",
+    Icon: FiGrid,
+  },
+  {
+    title: "Responsive Redesigns",
+    description:
+      "Breathe new life into outdated sites — fully responsive, accessible, and built for today's devices.",
+    Icon: FiSmartphone,
+  },
+  {
+    title: "API Integration",
+    description:
+      "Connect your frontend to third-party services, payment gateways, or custom backends with clean, typed APIs.",
+    Icon: FiLink,
+  },
+  {
+    title: "Deployment & Hosting",
+    description:
+      "From Vercel and Netlify to AWS — I set up CI/CD pipelines and get your project live, secured, and scaled.",
+    Icon: FiCloud,
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+export default function Services() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section id="services" className="services" ref={ref}>
+      <div className="services__container">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="section-title">
+            What I <span className="section-title__accent">Do</span>
+          </h2>
+        </motion.div>
+
+        <motion.div
+          className="services__grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {services.map(({ title, description, Icon }) => (
+            <motion.article
+              key={title}
+              className="service-card"
+              variants={cardVariants}
+            >
+              <div className="service-card__icon-wrap">
+                <Icon className="service-card__icon" />
+              </div>
+              <h3 className="service-card__title">{title}</h3>
+              <p className="service-card__description">{description}</p>
             </motion.article>
           ))}
         </motion.div>
@@ -1602,19 +1852,4 @@ section {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
-```
-
-## File: src/index.js
-```javascript
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
 ```

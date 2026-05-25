@@ -27,18 +27,17 @@ export default function Hero() {
       >
         <motion.p className="hero__greeting" variants={itemVariants}>
           <span />
-          {/* TODO: Replace with your name */}
           Hi, I'm Chukwuka
         </motion.p>
 
         <motion.h1 className="hero__headline" variants={itemVariants}>
-          Let's get your business{" "}
+          Let's get your business
           <span className="hero__headline-accent">a website!</span>
         </motion.h1>
 
         <motion.p className="hero__subtitle" variants={itemVariants}>
-          {/* TODO: Replace with your own tagline */}
-          Frontend · Backend · Full-Stack
+          I build responsive websites and web applications that ensures that
+          your business stands out online.
         </motion.p>
 
         <motion.div className="hero__ctas" variants={itemVariants}>

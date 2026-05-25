@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -40,17 +41,17 @@ export default function Navbar() {
       className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}
     >
       <div className="navbar__inner">
-        <a href="#hero" className="navbar__logo">
+        <Link to="/" className="navbar__logo" onClick={handleClick}>
           <span className="navbar__logo-bracket">&lt;</span>
           Guvnoh.build
           <span className="navbar__logo-bracket"> /&gt;</span>
-        </a>
+        </Link>
 
         <div className="navbar__desktop-links">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="navbar__link">
+            <Link key={link.href} to={link.href} className="navbar__link">
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -73,14 +74,14 @@ export default function Navbar() {
             className="navbar__mobile-menu"
           >
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={link.href}
+                to={link.href}
                 className="navbar__mobile-link"
                 onClick={handleClick}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </motion.div>
         )}
