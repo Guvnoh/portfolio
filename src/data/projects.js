@@ -69,7 +69,7 @@ const projects = [
       "Responsive design for mobile and desktop",
       "Fast build times and optimized assets via Vite",
     ],
-    liveUrl: "https://naija-kitchen.vercel.app/",
+    liveUrl: "https://beamish-fairy-1a694f.netlify.app/",
     githubUrl: "https://github.com/Guvnoh/naija_kitchen.git",
   },
 ];
