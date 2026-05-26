@@ -144,6 +144,14 @@
   width: 100%;
 }
 
+.navbar__link--active {
+  color: var(--text-primary);
+}
+
+.navbar__link--active::after {
+  width: 100%;
+}
+
 .navbar__hamburger {
   display: none;
   background: none;
@@ -177,6 +185,10 @@
 }
 
 .navbar__mobile-link:hover {
+  color: var(--accent);
+}
+
+.navbar__mobile-link--active {
   color: var(--accent);
 }
 

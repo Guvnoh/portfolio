@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
+import useActiveSection from "../hooks/useActiveSection";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -13,6 +14,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const activeSection = useActiveSection();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -48,11 +50,19 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar__desktop-links">
-          {navLinks.map((link) => (
-            <Link key={link.href} to={link.href} className="navbar__link">
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const section = link.href.replace("/#", "");
+            const isActive = activeSection === section;
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`navbar__link${isActive ? " navbar__link--active" : ""}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         <button
@@ -73,16 +83,20 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="navbar__mobile-menu"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className="navbar__mobile-link"
-                onClick={handleClick}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const section = link.href.replace("/#", "");
+              const isActive = activeSection === section;
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`navbar__mobile-link${isActive ? " navbar__mobile-link--active" : ""}`}
+                  onClick={handleClick}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>

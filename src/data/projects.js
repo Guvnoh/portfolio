@@ -2,7 +2,11 @@ const projects = [
   {
     slug: "noris-stitches",
     title: "Nori's Stitches",
-    images: ["/images/noris_stitches.png"],
+    images: [
+      "/images/noris_stitches.png",
+      "/images/noris_catalogue.png",
+      "/images/noris_footer.png",
+    ],
     description: `Responsive fashion catalogue website designed 
     to help customers browse collections easily across mobile and desktop devices`,
     detailedDescription: `A fully responsive e-commerce catalogue built for a fashion brand, enabling customers to browse collections, view product details, and explore the brand's offerings seamlessly across devices. The site focuses on visual storytelling and smooth navigation to create an engaging shopping experience.`,
@@ -50,9 +54,9 @@ const projects = [
     githubUrl: "https://github.com/Guvnoh/oakwood.git",
   },
   {
-    slug: "small-chops",
-    title: "Small Chops",
-    images: ["/images/small_chops.png"],
+    slug: "naija-kitchen",
+    title: "Naija Kitchen",
+    images: ["/images/naija_kitchen.png"],
     description: `A React + TypeScript, front end only restaurant website built with Vite, 
     featuring pages for Home, Menu, About, and Contact`,
     detailedDescription: `A modern, visually appealing restaurant website built with React and TypeScript using Vite. The site presents the restaurant's brand identity through a clean design, showcasing the menu, story, and contact information. It's optimized for performance and works flawlessly across all devices.`,
@@ -65,8 +69,8 @@ const projects = [
       "Responsive design for mobile and desktop",
       "Fast build times and optimized assets via Vite",
     ],
-    liveUrl: "https://small-chops.vercel.app/",
-    githubUrl: "https://github.com/Guvnoh/small_chops.git",
+    liveUrl: "https://naija-kitchen.vercel.app/",
+    githubUrl: "https://github.com/Guvnoh/naija_kitchen.git",
   },
 ];
 
