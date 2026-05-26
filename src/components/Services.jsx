@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   FiMonitor,
-  FiShoppingCart,
   FiGrid,
   FiSmartphone,
   FiLink,
@@ -17,12 +16,6 @@ const services = [
     Icon: FiMonitor,
   },
   {
-    title: "Ecommerce Frontends",
-    description:
-      "Modern storefronts with smooth checkout flows, product filtering, and mobile-first shopping experiences.",
-    Icon: FiShoppingCart,
-  },
-  {
     title: "Admin Dashboards",
     description:
       "Data-rich interfaces with charts, tables, and controls that make managing your business a breeze.",
@@ -31,7 +24,7 @@ const services = [
   {
     title: "Responsive Redesigns",
     description:
-      "Breathe new life into outdated sites — fully responsive, accessible, and built for today's devices.",
+      "Breathe new life into outdated sites. Fully responsive, accessible, and built for today's devices.",
     Icon: FiSmartphone,
   },
   {
@@ -43,7 +36,7 @@ const services = [
   {
     title: "Deployment & Hosting",
     description:
-      "From Vercel and Netlify to AWS — I set up CI/CD pipelines and get your project live, secured, and scaled.",
+      "From Vercel and Netlify to AWS. I get your project live and secured.",
     Icon: FiCloud,
   },
 ];

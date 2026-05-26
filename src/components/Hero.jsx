@@ -32,7 +32,7 @@ export default function Hero() {
 
         <motion.h1 className="hero__headline" variants={itemVariants}>
           Let's get your business
-          <span className="hero__headline-accent">a website!</span>
+          <span className="hero__headline-accent"> a website!</span>
         </motion.h1>
 
         <motion.p className="hero__subtitle" variants={itemVariants}>
@@ -50,18 +50,6 @@ export default function Hero() {
             <FiSend className="btn__icon" />
           </a>
         </motion.div>
-      </motion.div>
-
-      <motion.div
-        className="hero__scroll-indicator"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-      >
-        <div className="hero__scroll-mouse">
-          <div className="hero__scroll-dot" />
-        </div>
-        <span>Scroll</span>
       </motion.div>
     </section>
   );

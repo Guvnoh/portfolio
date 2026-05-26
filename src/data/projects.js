@@ -15,10 +15,11 @@ const projects = [
       "Contact and inquiry form integration",
     ],
     liveUrl: "https://noris-stitches.vercel.app/",
+    githubUrl: "https://github.com/Guvnoh/noris_stitches.git",
   },
   {
-    slug: "oakwood",
-    title: "Oakwood",
+    slug: "oakwood-care",
+    title: "Oakwood care",
     images: [
       "/images/oakwood.png",
       "/images/oakwood_dashboard.png",
@@ -32,7 +33,7 @@ const projects = [
     description: `A React + TypeScript care home management platform 
     with a public-facing website (Home, Services, Gallery, Contact, Careers) 
     and a protected admin dashboard for managing residents, staff, rooms, medication,
-     incidents, CQC reports, and billing.`,
+     incidents and CQC reports.`,
     detailedDescription: `A comprehensive care home management platform built with React and TypeScript. The public-facing website showcases the facility's services, gallery, and career opportunities, while the protected admin dashboard provides full operational control. Administrators can manage resident records, staff schedules, room allocations, medication logs, incident reports, CQC compliance documentation, and billing — all from a single, intuitive interface.`,
     tags: ["React", "TypeScript", "Node.js", "Tailwind CSS", "MongoDB"],
     features: [
@@ -46,6 +47,7 @@ const projects = [
       "Billing and invoice management",
     ],
     liveUrl: "https://oakwood-zeta.vercel.app/",
+    githubUrl: "https://github.com/Guvnoh/oakwood.git",
   },
   {
     slug: "small-chops",
@@ -64,6 +66,7 @@ const projects = [
       "Fast build times and optimized assets via Vite",
     ],
     liveUrl: "https://small-chops.vercel.app/",
+    githubUrl: "https://github.com/Guvnoh/small_chops.git",
   },
 ];
 

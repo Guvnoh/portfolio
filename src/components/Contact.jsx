@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import { FaWhatsapp } from "react-icons/fa";
 import {
   FiGithub,
   FiLinkedin,
@@ -9,7 +10,6 @@ import {
   FiMail,
   FiMapPin,
   FiPhoneCall,
-  FiMessageCircle,
   FiCheck,
   FiAlertCircle,
 } from "react-icons/fi";
@@ -29,7 +29,7 @@ export default function Contact() {
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         formRef.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       );
       setStatus("sent");
       formRef.current.reset();
@@ -150,7 +150,6 @@ export default function Contact() {
               <FiMapPin className="contact__info-icon" />
               <div>
                 <span className="contact__info-label">Based in</span>
-                {/* TODO: Replace with your location */}
                 <span className="contact__info-value">Onitsha, Nigeria</span>
               </div>
             </div>
@@ -159,7 +158,6 @@ export default function Contact() {
               <FiPhoneCall className="contact__info-icon" />
               <div>
                 <span className="contact__info-label">Phone</span>
-                {/* TODO: Replace with your location */}
                 <span className="contact__info-value">+2347039328304</span>
               </div>
             </div>
@@ -167,36 +165,37 @@ export default function Contact() {
             <div className="contact__socials">
               <span className="contact__socials-label">Find me on</span>
               <div className="contact__socials-row">
-                {/* TODO: Replace # with actual profile URLs */}
                 <a
                   href="https://github.com/Guvnoh"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="contact__social-link"
                   aria-label="GitHub"
-                  // onClick={(e) => e.preventDefault()}
                 >
                   <FiGithub />
                 </a>
-                <a
+                {/* <a
                   href="https://linkedin.com/in/chukwuka-asogwa"
                   className="contact__social-link"
                   aria-label="LinkedIn"
-                  onClick={(e) => e.preventDefault()}
                 >
                   <FiLinkedin />
-                </a>
+                </a> */}
                 <a
-                  href="tel:+2347039328304"
+                  href="https://wa.me/2347039328304"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="contact__social-link"
-                  aria-label="Phone"
-                  onClick={(e) => e.preventDefault()}
+                  aria-label="WhatsApp"
                 >
-                  <FiMessageCircle />
+                  <FaWhatsapp />
                 </a>
                 <a
                   href="https://twitter.com/chookarh"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="contact__social-link"
                   aria-label="Twitter"
-                  // onClick={(e) => e.preventDefault()}
                 >
                   <FiTwitter />
                 </a>

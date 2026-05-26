@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   FiArrowLeft,
   FiExternalLink,
+  FiGithub,
   FiCheck,
 } from "react-icons/fi";
 import { getProjectBySlug } from "../data/projects";
@@ -101,6 +102,16 @@ export default function ProjectDetail() {
               >
                 Live Demo <FiExternalLink className="btn__icon" />
               </a>
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--outline"
+                >
+                  <FiGithub className="btn__icon" /> GitHub
+                </a>
+              )}
             </div>
           )}
         </div>

@@ -62,6 +62,10 @@ export default function About() {
               ideas into clean, responsive products that are fast, functional
               and intuitive.
             </p>
+            <p>
+              I enjoy building interfaces that feel simple to use while still
+              solving real business problems.
+            </p>
           </div>
         </motion.div>
 
